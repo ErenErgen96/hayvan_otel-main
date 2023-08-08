@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:hayvan_oteli/view/details_screen.dart';
+import 'package:hayvan_oteli/view/live_camera_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import 'package:hayvan_oteli/view/communication_screen.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
@@ -80,7 +81,8 @@ class _HomePageState extends State<HomePage> {
               color: Colors.green,),
               title: Text('Kameralar'),
               onTap: () {
-                Navigator.pop(context); // Drawer kapatılır
+                Navigator.pop(context); 
+                Get.to(() => const LiveCameraScreen());
                 //
               },
             ),
@@ -89,8 +91,8 @@ class _HomePageState extends State<HomePage> {
               color: Colors.amber,),
               title: Text('Tanıtım'),
               onTap: () {
-                Navigator.pop(context); // Drawer kapatılır
-                // Tanıtım ekranına yönlendirme yapılabilir
+                Navigator.pop(context); 
+               
               },
             ),
             ListTile(
@@ -98,7 +100,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.red,),
               title: Text('İletişim'),
               onTap: () {
-                Navigator.pop(context); // Drawer kapatılır
+                Navigator.pop(context);
                  Get.bottomSheet(Container(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
