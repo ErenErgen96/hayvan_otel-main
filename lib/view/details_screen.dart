@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:hayvan_oteli/view/testfilefile.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key});
@@ -11,6 +12,11 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+
+  double basePrice = 10.0; 
+  int selectedPackage = 1; 
+  int numberOfDays = 1; 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,10 +26,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
         centerTitle: true,
       ),body: ListView(
         children: [
-          CardWidget(imagePath: "assets/animals/dog.jpg",labelText: "Köpek",cardColor: Colors.lightGreen),
-          CardWidget(imagePath: "assets/animals/cat.jpg",labelText: "Kedi", cardColor: Colors.amber,),
-          CardWidget(imagePath: "assets/animals/bird.jpg",labelText: "Kuş", cardColor: Colors.red,),
-          CardWidget(imagePath: "assets/animals/horse.jpg",labelText: "At", cardColor: Colors.indigo,),
+          Container(
+            color: Colors.lightGreenAccent,
+            child: Column(
+              children: [
+                CardWidget(imagePath: "assets/animals/dog.jpg",labelText: "Köpek",cardColor: Colors.lightGreen, ),
+                Slider(
+                  value: numberOfDays.toDouble(),
+                  min: 1,
+                  max: 30,
+                  onChanged: (value) {
+                    setState(() {
+                      numberOfDays = value.toInt();
+                    });
+                  },
+                ),
+              ],
+            )),
+          CardWidget(imagePath: "assets/animals/cat.jpg",labelText: "Kedi", cardColor: Colors.amber, ),
+          CardWidget(imagePath: "assets/animals/bird.jpg",labelText: "Kuş", cardColor: Colors.red, ),
+          CardWidget(imagePath: "assets/animals/horse.jpg",labelText: "At", cardColor: Colors.indigo, ),
           
         ],
       ),
@@ -36,7 +58,7 @@ class CardWidget extends StatelessWidget {
   
     final String imagePath;
     final String labelText;
-    final  cardColor;
+    final cardColor;
     
   const CardWidget({
     Key? key,
@@ -49,7 +71,7 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.snackbar("Warning", "Constuction completed");
+        Get.to(() => const TestFileFile());
       },
       child: Card(
         elevation: 2,
@@ -70,9 +92,12 @@ class CardWidget extends StatelessWidget {
                 ),
                 ),
                 
-              SizedBox(width: 16,),
-              Text(labelText,
-              style: TextStyle(fontSize: 24,color:Colors.white60 ),),
+              Column(
+                children: [
+                  Text(labelText,
+                  style: TextStyle(fontSize: 24,color:Colors.white60 ),),
+                ],
+              ),
               Container(width: 30,)
             ],
           ),
