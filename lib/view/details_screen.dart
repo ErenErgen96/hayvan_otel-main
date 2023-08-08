@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:hayvan_oteli/view/testfilefile.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key});
@@ -13,16 +12,45 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
 
-  double basePrice = 10.0; 
-  int selectedPackage = 1; 
-  int numberOfDays = 1; 
+  double basePriceCat = 10.0; 
+  double basePriceDog = 20.0; 
+  double basePriceBird = 5.0; 
+  double basePriceHorse = 50.0; 
+  
+  int selectedPackage1 = 1; 
+  int selectedPackage2 = 1; 
+  int selectedPackage3 = 1; 
+  int selectedPackage4 = 1; 
 
-  double packageCoeffAlt = 1;
-  double packageCoeffUst = 2;
+  int numberOfDaysDog = 1; 
+  int numberOfDaysCat = 1;
+  int numberOfDaysHorse = 1;
+  int numberOfDaysBird = 1;
 
-   double calculateTotalPrice() {
-    double packageCoeff = selectedPackage == 1 ? packageCoeffUst : packageCoeffAlt;
-    return basePrice * packageCoeff * numberOfDays;
+  double packageCoeffAltDog = 1;
+  double packageCoeffUstDog = 2;
+  double packageCoeffAltCat = 1;
+  double packageCoeffUstCat = 2;
+  double packageCoeffAltHorse = 1;
+  double packageCoeffUstHorse = 2;
+  double packageCoeffAltBird = 1;
+  double packageCoeffUstBird = 2;
+
+   double calculateDogPrice() {
+    double packageCoeff = selectedPackage1 == 1 ? packageCoeffUstDog : packageCoeffAltDog;
+    return basePriceDog * packageCoeff * numberOfDaysDog;
+  }
+  double calculateCatPrice() {
+    double packageCoeff = selectedPackage2 == 1 ? packageCoeffUstCat : packageCoeffAltCat;
+    return basePriceCat * packageCoeff * numberOfDaysCat;
+  }
+  double calculateBirdPrice() {
+    double packageCoeff = selectedPackage3 == 1 ? packageCoeffUstBird : packageCoeffAltBird;
+    return basePriceBird * packageCoeff * numberOfDaysBird;
+  }
+  double calculateHorsePrice() {
+    double packageCoeff = selectedPackage4 == 1 ? packageCoeffUstHorse : packageCoeffAltHorse;
+    return basePriceHorse * packageCoeff * numberOfDaysHorse;
   }
 
   @override
@@ -42,15 +70,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 Row(mainAxisAlignment: MainAxisAlignment.center,
                   children: [Text("Gün Sayısı",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
                     Slider(
-                      value: numberOfDays.toDouble(),
+                      value: numberOfDaysDog.toDouble(),
                       min: 1,
                       max: 30,
                       onChanged: (value) {
                         setState(() {
-                          numberOfDays = value.toInt();
+                          numberOfDaysDog = value.toInt();
                         });
                       },
-                    ),Text(numberOfDays.toString(), style: TextStyle(color: Colors.black87),)
+                    ),Text(numberOfDaysDog.toString(), style: TextStyle(color: Colors.black87),)
                   ],
                 ),
                 Container(
@@ -60,9 +88,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     children: [
                       Column(
                         children: [
-                          Switch(value: selectedPackage == 1, onChanged: (value){
+                          Switch(value: selectedPackage1 == 1, onChanged: (value){
                             setState(() {
-                              selectedPackage = value ? 1 : 2;
+                              selectedPackage1 = value ? 1 : 2;
                             });
                           }),Text("Üst Paket"),
                         ],
@@ -75,7 +103,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   ),
                       ),
             Text(
-              '\$${calculateTotalPrice().toStringAsFixed(2)}',
+              '\$${calculateDogPrice().toStringAsFixed(2)}',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
                     ],
@@ -84,9 +112,157 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ],
             )
             ),
-          CardWidget(imagePath: "assets/animals/cat.jpg",labelText: "Kedi", cardColor: Colors.amber, ),
-          CardWidget(imagePath: "assets/animals/bird.jpg",labelText: "Kuş", cardColor: Colors.red, ),
-          CardWidget(imagePath: "assets/animals/horse.jpg",labelText: "At", cardColor: Colors.indigo, ),
+           Container(
+            color: Colors.yellow,
+            child: Column(
+              children: [
+                CardWidget(imagePath: "assets/animals/cat.jpg",labelText: "Kedi",cardColor: Colors.amber, ),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text("Gün Sayısı",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
+                    Slider(
+                      value: numberOfDaysCat.toDouble(),
+                      min: 1,
+                      max: 30,
+                      onChanged: (value) {
+                        setState(() {
+                          numberOfDaysCat = value.toInt();
+                        });
+                      },
+                    ),Text(numberOfDaysCat.toString(), style: TextStyle(color: Colors.black87),)
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Switch(value: selectedPackage2 == 1, onChanged: (value){
+                            setState(() {
+                              selectedPackage2 = value ? 1 : 2;
+                            });
+                          }),Text("Üst Paket"),
+                        ],
+                      ),Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                                    'Toplam Fiyat:',
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                      ),
+            Text(
+              '\$${calculateCatPrice().toStringAsFixed(2)}',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+                    ],
+                  ),
+                )
+              ],
+            )
+            ),
+            Container(
+            color: Colors.redAccent,
+            child: Column(
+              children: [
+                CardWidget(imagePath: "assets/animals/bird.jpg",labelText: "Kuş",cardColor: Colors.red, ),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text("Gün Sayısı",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
+                    Slider(
+                      value: numberOfDaysBird.toDouble(),
+                      min: 1,
+                      max: 30,
+                      onChanged: (value) {
+                        setState(() {
+                          numberOfDaysBird = value.toInt();
+                        });
+                      },
+                    ),Text(numberOfDaysBird.toString(), style: TextStyle(color: Colors.black87),)
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Switch(value: selectedPackage3 == 1, onChanged: (value){
+                            setState(() {
+                              selectedPackage3 = value ? 1 : 2;
+                            });
+                          }),Text("Üst Paket"),
+                        ],
+                      ),Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                                    'Toplam Fiyat:',
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                      ),
+            Text(
+              '\$${calculateBirdPrice().toStringAsFixed(2)}',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+                    ],
+                  ),
+                )
+              ],
+            )
+            ),
+            Container(
+            color: Colors.lightBlueAccent,
+            child: Column(
+              children: [
+                CardWidget(imagePath: "assets/animals/horse.jpg",labelText: "At",cardColor: Colors.indigo, ),
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text("Gün Sayısı",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
+                    Slider(
+                      value: numberOfDaysHorse.toDouble(),
+                      min: 1,
+                      max: 30,
+                      onChanged: (value) {
+                        setState(() {
+                          numberOfDaysHorse = value.toInt();
+                        });
+                      },
+                    ),Text(numberOfDaysHorse.toString(), style: TextStyle(color: Colors.black87),)
+                  ],
+                ),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Switch(value: selectedPackage4 == 1, onChanged: (value){
+                            setState(() {
+                              selectedPackage4 = value ? 1 : 2;
+                            });
+                          }),Text("Üst Paket"),
+                        ],
+                      ),Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                                    'Toplam Fiyat:',
+                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                      ),
+            Text(
+              '\$${calculateHorsePrice().toStringAsFixed(2)}',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+                    ],
+                  ),
+                )
+              ],
+            )
+            ),
+            
           
         ],
       ),
@@ -112,7 +288,7 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => const TestFileFile());
+        Get.snackbar("Detay", "Detay Sayfası");
       },
       child: Card(
         elevation: 2,
