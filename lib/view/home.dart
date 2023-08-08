@@ -2,18 +2,25 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
+import 'package:hayvan_oteli/view/details_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import 'package:hayvan_oteli/view/communication_screen.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
-
 //import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
+  
 }
 
+
+
+
 class _HomePageState extends State<HomePage> {
+
+  final CarouselController _carouselController = CarouselController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +34,12 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               CarouselSlider(
+                carouselController: _carouselController,
                 items: [
-                  Image.asset('assets/onboarding/page2.avif'),
-                  Image.asset('assets/onboarding/page1.avif'),
-                  Image.asset('assets/onboarding/page3.png'),
+                  Image.asset('assets/animals/dog.jpg'),
+                  Image.asset('assets/animals/cat.jpg'),
+                  Image.asset('assets/animals/bird.jpg'),
+                  Image.asset('assets/animals/horse.jpg'),
                 ],
                 options: CarouselOptions(
                   autoPlay: true,
@@ -136,10 +145,11 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // onpressed
+          Get.to(() => const DetailsScreen());
           
                
         },
-        child: Icon(Icons.add),
+        child: Icon(Icons.info_outline_rounded),
         backgroundColor: Colors.green, 
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
