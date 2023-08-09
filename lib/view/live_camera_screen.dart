@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class LiveCameraScreen extends StatefulWidget {
   const LiveCameraScreen({super.key});
@@ -10,6 +11,16 @@ class LiveCameraScreen extends StatefulWidget {
 class _LiveCameraScreenState extends State<LiveCameraScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Canlı Kamera'),
+        centerTitle: true,
+      ),
+      body: InAppWebView(
+        initialUrlRequest: URLRequest(
+          url: Uri.parse('https://istanbuluseyret.ibb.gov.tr/kiz-kulesi/'),
+        ),
+      ),
+    );
   }
 }

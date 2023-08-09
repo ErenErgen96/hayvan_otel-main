@@ -1,10 +1,16 @@
 //ONPROGRESS
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:hayvan_oteli/view/details_screen.dart';
 import 'package:hayvan_oteli/view/live_camera_screen.dart';
+import 'package:hayvan_oteli/view/virtual_tour_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:intl/intl.dart';
+
 //import 'package:hayvan_oteli/view/communication_screen.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
@@ -18,9 +24,29 @@ class HomePage extends StatefulWidget {
 
 
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>  {
 
   final CarouselController _carouselController = CarouselController();
+  String currentTime = '';
+
+  @override
+  void initState() {
+    super.initState();
+    updateQRCode();
+  }
+
+  void updateQRCode() {
+    setState(() {
+      currentTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+    });
+
+    Future.delayed(Duration(seconds: 5), () {
+      updateQRCode();
+    });
+  }
+
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +57,42 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.green,
       ),
       body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CarouselSlider(
-                carouselController: _carouselController,
-                items: [
-                  Image.asset('assets/animals/dog.jpg'),
-                  Image.asset('assets/animals/cat.jpg'),
-                  Image.asset('assets/animals/bird.jpg'),
-                  Image.asset('assets/animals/horse.jpg'),
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    carouselController: _carouselController,
+                    items: [
+                      Image.asset('assets/animals/dog.jpg'),
+                      Image.asset('assets/animals/cat.jpg'),
+                      Image.asset('assets/animals/bird.jpg'),
+                      Image.asset('assets/animals/horse.jpg'),
+                    ],
+                    options: CarouselOptions(
+                      autoPlay: true,
+                      aspectRatio: 16 / 9,
+                      enlargeCenterPage: true,
+                      enlargeStrategy: CenterPageEnlargeStrategy.height,
+                    ),
+                  ),
                 ],
-                options: CarouselOptions(
-                  autoPlay: true,
-                  aspectRatio: 16 / 9,
-                  enlargeCenterPage: true,
-                  enlargeStrategy: CenterPageEnlargeStrategy.height,
+              ),
+            ),
+            Column(
+              children: [Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(top:24.0),
+                  child: Text("QR Saat",style: TextStyle(color: Colors.green,fontSize: 18,fontWeight: FontWeight.bold),),
                 ),
               ),
-            ],
-          ),
+                QrImageView(data: currentTime,version: QrVersions.auto,size: 200,),
+              ],
+            )
+          ],
         ),
+        
       ),
       drawer: Drawer(
         child: ListView(
@@ -92,6 +133,7 @@ class _HomePageState extends State<HomePage> {
               title: Text('Tanıtım'),
               onTap: () {
                 Navigator.pop(context); 
+                Get.to(() => VirtualTour());
                
               },
             ),
@@ -144,17 +186,28 @@ class _HomePageState extends State<HomePage> {
         ),
 
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // onpressed
-          Get.to(() => const DetailsScreen());
-          
-               
-        },
-        child: Icon(Icons.info_outline_rounded),
-        backgroundColor: Colors.green, 
-      ),
+      floatingActionButton: Column(
+  mainAxisAlignment: MainAxisAlignment.end,
+  children: [
+    FloatingActionButton(
+      onPressed: () {
+        // First FAB's action
+      },
+      child: Icon(Icons.camera_alt),
+      backgroundColor: Colors.blue,
+    ),
+    SizedBox(height: 16), 
+    FloatingActionButton(
+      onPressed: () {
+        Get.to(() => DetailsScreen());
+      },
+      child: Icon(Icons.info_outline_rounded),
+      backgroundColor: Colors.green,
+    ),
+  ],
+),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    
       
     );
   }
