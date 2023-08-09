@@ -62,13 +62,13 @@ int _pageIndex = 0;
                 child: ElevatedButton(
   onPressed: () {
     if (_pageIndex == onboarding_datas.length - 1) {
-      // User is on the last onboarding page, navigate to the main page.
+      
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     } else {
-      // Move to the next onboarding page.
+      
       _pageController.nextPage(
         duration: Duration(milliseconds: 1000),
         curve: Curves.ease,
