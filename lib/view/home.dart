@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage>  {
   children: [
     FloatingActionButton(
       onPressed: () {
-        // First FAB's action
+        //FAB KAMERA MODEL ACTION
       },
       child: Icon(Icons.camera_alt),
       backgroundColor: Colors.blue,
