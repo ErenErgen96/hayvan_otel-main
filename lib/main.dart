@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayvan_oteli/view/home.dart';
 import 'package:hayvan_oteli/view/login_screen.dart';
-import 'package:hayvan_oteli/view/splash_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: HomePage(),
     );
   }
 }

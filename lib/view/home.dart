@@ -4,8 +4,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
-import 'package:hayvan_oteli/view/details_screen.dart';
 import 'package:hayvan_oteli/view/live_camera_screen.dart';
+import 'package:hayvan_oteli/view/detail_screen.dart';
 import 'package:hayvan_oteli/view/virtual_tour_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -44,6 +44,10 @@ class _HomePageState extends State<HomePage>  {
       updateQRCode();
     });
   }
+  List<int> carouselImageIndices = [0, 1, 2, 3];
+  int currentCarouselIndex = 0;
+
+
 
 
   
@@ -75,6 +79,11 @@ class _HomePageState extends State<HomePage>  {
                       aspectRatio: 16 / 9,
                       enlargeCenterPage: true,
                       enlargeStrategy: CenterPageEnlargeStrategy.height,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          currentCarouselIndex = index;
+                        });
+                      },
                     ),
                   ),
                 ],
@@ -199,10 +208,21 @@ class _HomePageState extends State<HomePage>  {
     SizedBox(height: 16), 
     FloatingActionButton(
       onPressed: () {
-        Get.to(() => DetailsScreen());
-      },
-      child: Icon(Icons.info_outline_rounded),
-      backgroundColor: Colors.green,
+        int selectedPicker = 0;
+    if (currentCarouselIndex == 0) {
+      selectedPicker = 0; // Köpek resmi
+    } else if (currentCarouselIndex == 1) {
+      selectedPicker = 1; // Kedi resmi
+    } else if (currentCarouselIndex == 2) {
+      selectedPicker = 2; // Kuş resmi
+    } else if (currentCarouselIndex == 3) {
+      selectedPicker = 3; // At resmi
+    }
+
+    Get.to(() => DetailScreen(picker: selectedPicker));
+  },
+  child: Icon(Icons.info_outline_rounded),
+  backgroundColor: Colors.green,
     ),
   ],
 ),

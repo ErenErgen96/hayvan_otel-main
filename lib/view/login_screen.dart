@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
         "Content-Type": "application/json",
       },
       body: jsonEncode({
-        "userName": usernameController.text,
+        "gsm": usernameController.text,
         "password": passwordController.text,
       }),
     );
