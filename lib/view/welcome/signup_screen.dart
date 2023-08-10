@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayvan_oteli/view/login_screen.dart';
+import 'package:hayvan_oteli/view/welcome/login_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -70,7 +70,9 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sign Up')),
+      appBar: AppBar(title: Text('Kayıt Ol'),
+      centerTitle: true,
+      backgroundColor: Colors.green,),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -78,28 +80,42 @@ class SignUp extends StatelessWidget {
           children: [
             TextField(
               controller: usernameController,
-              decoration: InputDecoration(labelText: 'İsim'),
+              decoration: InputDecoration(border: OutlineInputBorder(), labelText: 'İsim'),
+              
+            ),
+            SizedBox(
+              height: 8,
             ),
             TextField(
               controller: usersirnameController,
-              decoration: InputDecoration(labelText: 'Soyisim'),
+              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Soyisim'),
             ),
-            TextField(
+            SizedBox(
+              height: 8,
+            ),
+            TextField(obscureText: true,
               controller: passwordController,
-              decoration: InputDecoration(labelText: 'Şifre'),
+              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Şifre'),
+            ),
+            SizedBox(
+              height: 8,
             ),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Email'),
+            ),
+            SizedBox(
+              height: 8,
             ),
             TextField(
               controller: phoneNumberController,
-              decoration: InputDecoration(labelText: 'Telefon Numarası'),
+              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Telefon Numarası'),
             ),
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => _signUp(context),
-              child: Text('Sign Up'),
+              child: Text('Kayıt Ol'),
+              style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green),)
             ),
           ],
         ),

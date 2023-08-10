@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hayvan_oteli/view/live_camera_screen.dart';
 import 'package:hayvan_oteli/view/detail_screen.dart';
@@ -16,22 +17,25 @@ import 'package:intl/intl.dart';
 //import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
 class HomePage extends StatefulWidget {
+  final String accountOwner;
+
+  const HomePage({super.key, required this.accountOwner});
   @override
   _HomePageState createState() => _HomePageState();
   
 }
 
-
-
-
 class _HomePageState extends State<HomePage>  {
 
   final CarouselController _carouselController = CarouselController();
   String currentTime = '';
-
+  
+   
+   String currentName = "Eren ERGEN";
   @override
   void initState() {
     super.initState();
+      currentName = widget.accountOwner;
     updateQRCode();
   }
 
@@ -121,9 +125,9 @@ class _HomePageState extends State<HomePage>  {
             ),ListTile(
               leading: Icon(Icons.person,
               color: Colors.indigo,),
-              title: Text("Profil"),
+              title: Text(currentName),
               onTap: (){
-                Navigator.pop(context);
+                Fluttertoast.showToast(msg:"${currentName} olarak giriş yaptınız");
               },
             ),
             ListTile(
@@ -172,7 +176,7 @@ class _HomePageState extends State<HomePage>  {
                         leading: const Icon(Icons.photo),
                         title: const Text('Instagram'),
                         onTap: () {
-                          //instagramlinki
+                          Fluttertoast.showToast(msg:  "İnstagram linki açıldı.");
                         },
                         tileColor: Colors.amber,
                         textColor: Colors.white,
@@ -181,7 +185,7 @@ class _HomePageState extends State<HomePage>  {
                         leading: Icon(Icons.facebook),
                         title: Text("Facebook"),
                         onTap: (){
-                          //facebooklinki
+                          Fluttertoast.showToast(msg:  "Facebook linki açıldı.");
                         },
                         tileColor: Colors.blue,
                         textColor: Colors.white,

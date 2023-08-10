@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayvan_oteli/view/signup_screen.dart';
+import 'package:hayvan_oteli/view/home.dart';
+import 'package:hayvan_oteli/view/welcome/signup_screen.dart';
 import 'package:hayvan_oteli/view/splash_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
@@ -27,9 +28,13 @@ class LoginScreen extends StatelessWidget {
       final responseBody = json.decode(response.body);
       if (responseBody['isSuccess'] == true) {
         print("Giriş başarılı oldu. Yanıt: ${response.body}");
-        Fluttertoast.showToast(msg: "Giriş Başarılı");
+        late final responseName = responseBody['userName'];
+        late final responseSurname = responseBody['userSurname'];
+        Fluttertoast.showToast(msg:  "Giriş Başarılı Sayın ${responseName} ${responseSurname}");
         
-        Get.to(() => SplashScreen());
+        Get.to(() => HomePage(accountOwner: "${responseName} ${responseSurname}",));
+        
+        
       } else {
         Fluttertoast.showToast(msg: "Giriş Başarısız");
         print("Giriş başarısız oldu. Yanıt: ${response.body}");
@@ -43,27 +48,40 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: Text('Giriş Yap'),
+      centerTitle: true,
+      backgroundColor: Colors.green,),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              
                 controller: usernameController,
-                decoration: InputDecoration(labelText: 'Kullanıcı Adı')),
+                decoration: InputDecoration(
+                  hintText: "Kullanıcı Adınızı Giriniz.",
+                  labelText: 'Kullanıcı Adı'),
+                  ),
             TextField(
+              obscureText: true,
                 controller: passwordController,
-                decoration: InputDecoration(labelText: 'Şifre')),
+                decoration: InputDecoration(
+                  hintText: "Şifrenizi Giriniz",
+                  labelText: 'Şifre')),
             SizedBox(height: 16),
             ElevatedButton(
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
+
               onPressed: () => _login(context),
-              child: Text('Login'),
+              child: Text('Giriş yap'),
             ),
             SizedBox(
               height: 16,
             ),
+            Text("Hesabınız yok mu?",style: TextStyle(color: Colors.black.withAlpha(150)),),
             TextButton(
+              style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.green)),
                 onPressed: () {
                   Get.to(() => SignUp());
                 },
