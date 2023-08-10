@@ -16,7 +16,7 @@ class SignUp extends StatelessWidget {
 
   SignUp({super.key});
 
-  String dateTimeNow = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
+ final String dateTimeNow = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
   void _signUp(BuildContext context) async {
     final response = await http.post(
