@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hayvan_oteli/view/home.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:async';
 import 'onboarding_screen.dart';
@@ -22,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
         });
       } else {
         timer.cancel();
-        navigateToOnBoardingScreen();
+        Get.to(() => HomePage());
       }
     });
   }
@@ -33,11 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.dispose();
   }
 
-  void navigateToOnBoardingScreen() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => OnBoardingScreen()),
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {

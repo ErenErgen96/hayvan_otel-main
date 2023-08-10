@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hayvan_oteli/view/splash_screen.dart';
 //import '../viewmodel/onboarding_viewmodel.dart';
 import 'home.dart';
 // ONPROGRESS
@@ -63,10 +65,7 @@ int _pageIndex = 0;
   onPressed: () {
     if (_pageIndex == onboarding_datas.length - 1) {
       
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage()),
-      );
+      Get.to(() => SplashScreen());
     } else {
       
       _pageController.nextPage(
