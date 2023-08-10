@@ -26,8 +26,9 @@ class LoginScreen extends StatelessWidget {
     if (response.statusCode == 200) {
       final responseBody = json.decode(response.body);
       if (responseBody['isSuccess'] == true) {
-        Fluttertoast.showToast(msg: "Giriş Başarılı");
         print("Giriş başarılı oldu. Yanıt: ${response.body}");
+        Fluttertoast.showToast(msg: "Giriş Başarılı");
+        
         Get.to(() => SplashScreen());
       } else {
         Fluttertoast.showToast(msg: "Giriş Başarısız");
@@ -50,10 +51,10 @@ class LoginScreen extends StatelessWidget {
           children: [
             TextField(
                 controller: usernameController,
-                decoration: InputDecoration(labelText: 'Username')),
+                decoration: InputDecoration(labelText: 'Kullanıcı Adı')),
             TextField(
                 controller: passwordController,
-                decoration: InputDecoration(labelText: 'Password')),
+                decoration: InputDecoration(labelText: 'Şifre')),
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => _login(context),

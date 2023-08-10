@@ -16,7 +16,6 @@ class SignUp extends StatelessWidget {
 
   SignUp({super.key});
 
- final String dateTimeNow = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
   void _signUp(BuildContext context) async {
     final response = await http.post(
@@ -30,7 +29,7 @@ class SignUp extends StatelessWidget {
         "kullaniciAd": usernameController.text,
         "kullaniciSoyad": usersirnameController.text,
         "eposta": emailController.text,
-        "qrid": dateTimeNow,
+        "qrid": "",
       }),
     );
 
@@ -38,7 +37,7 @@ class SignUp extends StatelessWidget {
       final responseBody = json.decode(response.body);
       if (responseBody['isSuccess'] == true) {
         String responseMsg = responseBody['responseMsg'];
-
+        print("Kayıt Başarılı Oldu: ${response.body}");
         Fluttertoast.showToast(msg: " $responseMsg");
         Get.to(() => LoginScreen());
       } else {
@@ -69,13 +68,13 @@ class SignUp extends StatelessWidget {
                 decoration: InputDecoration(labelText: 'Soyisim')),
             TextField(
                 controller: passwordController,
-                decoration: InputDecoration(labelText: 'Password')),
+                decoration: InputDecoration(labelText: 'Şifre')),
             TextField(
                 controller: emailController,
                 decoration: InputDecoration(labelText: 'Email')),
             TextField(
                 controller: phoneNumberController,
-                decoration: InputDecoration(labelText: 'Phone Number')),
+                decoration: InputDecoration(labelText: 'Telefon Numarası')),
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => _signUp(context),
