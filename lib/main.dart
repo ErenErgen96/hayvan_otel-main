@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayvan_oteli/view/home.dart';
-import 'package:hayvan_oteli/view/welcome/login_screen.dart';
-import 'package:hayvan_oteli/view/onboarding_screen.dart';
-import 'package:hayvan_oteli/view/welcome/signup_screen.dart';
 import 'package:hayvan_oteli/view/welcome/welcome_screen.dart';
 
 void main() {

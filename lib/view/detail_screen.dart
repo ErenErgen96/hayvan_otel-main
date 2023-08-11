@@ -40,7 +40,6 @@ class _DetailScreenState extends State<DetailScreen> {
       cardColor: Colors.indigo,
       basePrice: 50.0,
     ),
-    // Diğer hayvan türleri
   ];
 
   
@@ -50,7 +49,7 @@ class _DetailScreenState extends State<DetailScreen> {
   double packageCoeffAlt = 1;
   double packageCoeffUst = 2;
 
-  int selectedAnimalIndex = 0; // Varsayılan olarak ilk hayvanı seçiyoruz
+  int selectedAnimalIndex = 0; 
 
   @override
   void initState() {
