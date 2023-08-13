@@ -84,7 +84,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Gün Sayısı",
+                    Text("Number of the Days".tr,
                         style:
                             TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                     Slider(
@@ -117,14 +117,14 @@ class _DetailScreenState extends State<DetailScreen> {
                                   selectedPackage = value ? 1 : 2;
                                 });
                               }),
-                          Text("Üst Paket"),
+                          Text("Top Package".tr),
                         ],
                       ),
                       Spacer(),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Toplam Fiyat:',
+                          "Total Price".tr + ":",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
@@ -139,7 +139,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(32.0),
-                  child: QrImageView(data: "${selectedAnimal.labelText} için seçiminiz toplam \$${calculatePrice().toStringAsFixed(2)}"),
+                  child: QrImageView(data: "${numberOfDays}" + "days for".tr + "${selectedAnimal.labelText} = \$${calculatePrice().toStringAsFixed(2)}"),
                 )
               ]),
             ),

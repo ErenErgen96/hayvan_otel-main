@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:get/get.dart';
 
 class LiveCameraScreen extends StatefulWidget {
   const LiveCameraScreen({super.key});
@@ -13,7 +14,7 @@ class _LiveCameraScreenState extends State<LiveCameraScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Canlı Kamera'),
+        title: Text('Live Camera'.tr),
         centerTitle: true,
       ),
       body: InAppWebView(

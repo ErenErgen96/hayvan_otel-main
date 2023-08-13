@@ -70,7 +70,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Kayıt Ol'),
+      appBar: AppBar(title: Text('Sign Up'.tr),
       centerTitle: true,
       backgroundColor: Colors.green,),
       body: Padding(
@@ -80,7 +80,7 @@ class SignUp extends StatelessWidget {
           children: [
             TextField(
               controller: usernameController,
-              decoration: InputDecoration(border: OutlineInputBorder(), labelText: 'İsim'),
+              decoration: InputDecoration(border: OutlineInputBorder(), labelText: 'Name'.tr),
               
             ),
             SizedBox(
@@ -88,33 +88,33 @@ class SignUp extends StatelessWidget {
             ),
             TextField(
               controller: usersirnameController,
-              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Soyisim'),
+              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Surname'.tr),
             ),
             SizedBox(
               height: 8,
             ),
             TextField(obscureText: true,
               controller: passwordController,
-              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Şifre'),
+              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Password'.tr),
             ),
             SizedBox(
               height: 8,
             ),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Email'),
+              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'E-mail'),
             ),
             SizedBox(
               height: 8,
             ),
             TextField(
               controller: phoneNumberController,
-              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Telefon Numarası'),
+              decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Phone Number'.tr),
             ),
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => _signUp(context),
-              child: Text('Kayıt Ol'),
+              child: Text('Sign Up'.tr),
               style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green),)
             ),
           ],

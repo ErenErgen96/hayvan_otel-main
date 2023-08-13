@@ -30,17 +30,17 @@ class LoginScreen extends StatelessWidget {
         print("Giriş başarılı oldu. Yanıt: ${response.body}");
         late final responseName = responseBody['userName'];
         late final responseSurname = responseBody['userSurname'];
-        Fluttertoast.showToast(msg:  "Giriş Başarılı Sayın ${responseName} ${responseSurname}");
+        Fluttertoast.showToast(msg:  "Welcome".tr + "${responseName} ${responseSurname}");
         
         Get.to(() => HomePage(accountOwner: "${responseName} ${responseSurname}",));
         
         
       } else {
-        Fluttertoast.showToast(msg: "Giriş Başarısız");
+        Fluttertoast.showToast(msg: "Login failed".tr);
         print("Giriş başarısız oldu. Yanıt: ${response.body}");
       }
     } else {
-      Fluttertoast.showToast(msg: "Giriş Başarısız");
+      Fluttertoast.showToast(msg: "Login failed".tr);
       print("Giriş başarısız oldu. Yanıt: ${response.body}");
     }
   }
@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Giriş Yap'),
+      appBar: AppBar(title: Text('Login'.tr),
       centerTitle: true,
       backgroundColor: Colors.green,),
       body: Padding(
@@ -60,32 +60,32 @@ class LoginScreen extends StatelessWidget {
               
                 controller: usernameController,
                 decoration: InputDecoration(
-                  hintText: "Kullanıcı Adınızı Giriniz.",
-                  labelText: 'Kullanıcı Adı'),
+                  hintText: "Enter Your Username".tr,
+                  labelText: 'Username'.tr),
                   ),
             TextField(
               obscureText: true,
                 controller: passwordController,
                 decoration: InputDecoration(
-                  hintText: "Şifrenizi Giriniz",
-                  labelText: 'Şifre')),
+                  hintText: "Enter Your Password".tr,
+                  labelText: 'Password'.tr)),
             SizedBox(height: 16),
             ElevatedButton(
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green)),
 
               onPressed: () => _login(context),
-              child: Text('Giriş yap'),
+              child: Text('Login'.tr),
             ),
             SizedBox(
               height: 16,
             ),
-            Text("Hesabınız yok mu?",style: TextStyle(color: Colors.black.withAlpha(150)),),
+            Text("You do not have an account?".tr,style: TextStyle(color: Colors.black.withAlpha(150)),),
             TextButton(
               style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Colors.green)),
                 onPressed: () {
                   Get.to(() => SignUp());
                 },
-                child: Text("Kayıt Ol"))
+                child: Text("Sign Up".tr))
           ],
         ),
       ),

@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage>  {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hayvan Oteli'),
+        title: Text('Animal Hotel'.tr),
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage>  {
               children: [Container(
                 child: Padding(
                   padding: const EdgeInsets.only(top:24.0),
-                  child: Text("QR Saat",style: TextStyle(color: Colors.green,fontSize: 18,fontWeight: FontWeight.bold),),
+                  child: Text("QR Time".tr,style: TextStyle(color: Colors.green,fontSize: 18,fontWeight: FontWeight.bold),),
                 ),
               ),
                 QrImageView(data: currentTime,version: QrVersions.auto,size: 200,),
@@ -127,13 +127,13 @@ class _HomePageState extends State<HomePage>  {
               color: Colors.indigo,),
               title: Text(currentName),
               onTap: (){
-                Fluttertoast.showToast(msg:"${currentName} olarak giriş yaptınız");
+                Fluttertoast.showToast(msg:"Welcome".tr + "${currentName}");
               },
             ),
             ListTile(
               leading: Icon(Icons.camera_rear_sharp,
               color: Colors.green,),
-              title: Text('Kameralar'),
+              title: Text('Cameras'.tr),
               onTap: () {
                 Navigator.pop(context); 
                 Get.to(() => const LiveCameraScreen());
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage>  {
             ListTile(
               leading: Icon(Icons.camera_roll,
               color: Colors.amber,),
-              title: Text('Tanıtım'),
+              title: Text('Advertisement'.tr),
               onTap: () {
                 Navigator.pop(context); 
                 Get.to(() => VirtualTour());
@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage>  {
             ListTile(
               leading: Icon(Icons.phone,
               color: Colors.red,),
-              title: Text('İletişim'),
+              title: Text('Contact'.tr),
               onTap: () {
                 Navigator.pop(context);
                  Get.bottomSheet(Container(
@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage>  {
                         onTap: () async {
                           final Uri url = Uri.parse('https://wa.me/+905334497615');
                             if (!await launchUrl(url)) {
-                              throw 'Bağlantı açılamadı: $url';
+                              throw 'Could\'t load the page'.tr;
                             }
                         },
                         tileColor: Colors.greenAccent,

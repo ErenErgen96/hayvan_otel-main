@@ -26,7 +26,7 @@ class WelcomeScreen extends StatelessWidget {
                       color: Colors.green,
                       borderRadius: BorderRadius.circular(50)),
                     padding: EdgeInsets.all(25),
-                    child: Text("HAYVAN OTELİ",style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),)),
+                    child: Text("Animal Hotel".tr,style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),)),
                   top: 150,
                   ),
                 Positioned(
@@ -49,7 +49,7 @@ class WelcomeScreen extends StatelessWidget {
                       onPressed: () {
                         Get.to(() => LoginScreen());
                       },
-                      child: Text('Giriş Yap'),
+                      child: Text('Login'.tr),
                     ),
                     SizedBox(height: 20), 
                     ElevatedButton(
@@ -59,7 +59,7 @@ class WelcomeScreen extends StatelessWidget {
                       onPressed: () {
                         Get.to(() => SignUp());
                       },
-                      child: Text('Kayıt Ol'),
+                      child: Text('Sign Up'.tr),
                     ),
                   ],
                 ),

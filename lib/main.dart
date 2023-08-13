@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hayvan_oteli/view/welcome/onboarding_screen.dart';
 import 'package:hayvan_oteli/view/welcome/welcome_screen.dart';
+import 'package:hayvan_oteli/lang/lang_data.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +20,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: (WelcomeScreen()),
+      translations: LocalString(),
+      locale: Get.deviceLocale, 
+      fallbackLocale: Locale('en', 'US'),
+      home: (OnBoardingScreen()),
     );
   }
 }

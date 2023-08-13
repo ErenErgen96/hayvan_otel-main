@@ -15,26 +15,26 @@ class _VirtualTourState extends State<VirtualTour> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('360 Otel Turu'),
+        title: Text('Virtual Tour'.tr),
       ),
       body: Column(
         children: [
           ListTile(
             leading: Icon(Icons.roofing),
-            title: Text("Çatı Katı"),
+            title: Text("Roof".tr),
             onTap: () {
               Get.to(() => RoofScreen(imagePath: 'assets/rooms/roof.jpg'));
             },
           ),
           ListTile(
             leading: Icon(Icons.hotel),
-            title: Text("Oda 1"),
+            title: Text("Room".tr + "1"),
             onTap: () {
               Get.to(() => RoofScreen(imagePath: 'assets/rooms/room1.jpg'));
             },
           ),
           ListTile(
-            title: Text("Oda 2"),
+            title: Text("Room".tr + "2"),
             leading: Icon(Icons.hotel),
             onTap: () {
               Get.to(() => RoofScreen(imagePath: 'assets/rooms/room2.jpg'));
