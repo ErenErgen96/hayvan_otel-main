@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayvan_oteli/view/home.dart';
 import 'package:hayvan_oteli/view/welcome/signup_screen.dart';
-import 'package:hayvan_oteli/view/welcome/splash_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
 

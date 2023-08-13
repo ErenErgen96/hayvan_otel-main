@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -18,25 +17,25 @@ class _DetailScreenState extends State<DetailScreen> {
   List<Animal> animals = [
     Animal(
       imagePath: "assets/animals/dog.jpg",
-      labelText: "Köpek",
+      labelText: "Dog".tr,
       cardColor: Colors.lightGreen,
       basePrice: 20.0,
     ),
     Animal(
       imagePath: "assets/animals/cat.jpg",
-      labelText: "Kedi",
+      labelText: "Cat".tr,
       cardColor: Colors.orange,
       basePrice: 10.0,
     ),
     Animal(
       imagePath: "assets/animals/bird.jpg",
-      labelText: "Kuş",
+      labelText: "Bird".tr,
       cardColor: Colors.red,
       basePrice: 5.0,
     ),
     Animal(
       imagePath: "assets/animals/horse.jpg",
-      labelText: "At",
+      labelText: "Horse.tr",
       cardColor: Colors.indigo,
       basePrice: 50.0,
     ),

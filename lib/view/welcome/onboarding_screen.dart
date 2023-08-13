@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hayvan_oteli/view/welcome/splash_screen.dart';
-//import '../viewmodel/onboarding_viewmodel.dart';
-import '../home.dart';
 // ONPROGRESS
 //kodlarımı mvvm ve provider kullanarak yeniden yapılandıracağım.
 class OnBoardingScreen extends StatefulWidget {

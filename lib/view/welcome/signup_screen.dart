@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:hayvan_oteli/view/welcome/login_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
 
 class SignUp extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
