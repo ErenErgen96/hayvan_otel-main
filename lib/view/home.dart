@@ -1,13 +1,16 @@
 //ONPROGRESS
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_mlkit_image_labeling/google_mlkit_image_labeling.dart';
 import 'package:hayvan_oteli/view/live_camera_screen.dart';
 import 'package:hayvan_oteli/view/detail_screen.dart';
 import 'package:hayvan_oteli/view/virtual_tour_screen.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:intl/intl.dart';
@@ -29,13 +32,21 @@ class _HomePageState extends State<HomePage>  {
 
   final CarouselController _carouselController = CarouselController();
   String currentTime = '';
+  late ImagePicker imagePicker;
+  File? _image;
+  String result = '';
+  dynamic imageLabeler;
   
    
    String currentName = "Eren ERGEN";
   @override
   void initState() {
     super.initState();
-      currentName = widget.accountOwner;
+    imagePicker = ImagePicker();
+    final ImageLabelerOptions options =
+        ImageLabelerOptions(confidenceThreshold: 0.5);
+    imageLabeler = ImageLabeler(options: options);
+    currentName = widget.accountOwner;
     updateQRCode();
   }
 
@@ -51,8 +62,70 @@ class _HomePageState extends State<HomePage>  {
   List<int> carouselImageIndices = [0, 1, 2, 3];
   int currentCarouselIndex = 0;
 
+@override
+  void dispose() {
+    super.dispose();
+    imageLabeler.close();
+  }
 
+  _imgFromCamera() async {
+    XFile? pickedFile = await imagePicker.pickImage(source: ImageSource.camera);
+    _image = File(pickedFile!.path);
+    setState(() {
+      _image;
+      doImageLabeling();
+    });
+  }
+   _imgFromGallery() async {
+    XFile? pickedFile =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+        doImageLabeling();
+      });
+    }
+  }
+  doImageLabeling() async {
+    result = "";
+  final inputImage = InputImage.fromFile(_image!);
+  final List<ImageLabel> labels = await imageLabeler.processImage(inputImage);
 
+  double maxConfidence = 0; // To keep track of the highest confidence
+  String maxConfidenceLabel = ""; // To store the label with the highest confidence
+
+  for (ImageLabel label in labels) {
+    final String text = label.label;
+    final double confidence = label.confidence;
+
+    if (confidence > maxConfidence) {
+      maxConfidence = confidence;
+      maxConfidenceLabel = text;
+    }
+
+    result += "$text   ${confidence.toStringAsFixed(2)}\n";
+    print("result += $text   ${confidence.toStringAsFixed(2)}\n");
+  }
+
+  setState(() {
+    result;
+  });
+
+    // Navigasyon
+  if (result.contains('Cat')) {
+    Get.to(() => DetailScreen(picker: 1,));
+  } else if (result.contains('Horse')) {
+    Get.to(() => DetailScreen(picker: 3,));
+  }
+  else if (result.contains('Dog')) {
+    Get.to(() => DetailScreen(picker: 0,));
+  }
+  else if (result.contains('Bird')) {
+    Get.to(() => DetailScreen(picker: 2,));
+  }else{
+    Fluttertoast.showToast(msg:"Otelde barınabilecek bir hayvan bulunamadı");
+  }
+  }
 
   
 
@@ -205,9 +278,10 @@ class _HomePageState extends State<HomePage>  {
     FloatingActionButton(
       onPressed: () {
         //FAB KAMERA MODEL ACTION
+        _imgFromCamera();
       },
       child: Icon(Icons.camera_alt),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.blue, 
     ),
     SizedBox(height: 16), 
     FloatingActionButton(
