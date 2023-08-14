@@ -11,6 +11,9 @@ class RoofScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.green,
+        elevation: 4,
         title: Text('Virtual Tour'.tr),
         
       ),

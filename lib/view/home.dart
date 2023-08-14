@@ -25,20 +25,17 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.accountOwner});
   @override
   _HomePageState createState() => _HomePageState();
-  
 }
 
-class _HomePageState extends State<HomePage>  {
-
+class _HomePageState extends State<HomePage> {
   final CarouselController _carouselController = CarouselController();
   String currentTime = '';
   late ImagePicker imagePicker;
   File? _image;
   String result = '';
   dynamic imageLabeler;
+  String currentName = "Eren ERGEN";
   
-   
-   String currentName = "Eren ERGEN";
   @override
   void initState() {
     super.initState();
@@ -59,10 +56,11 @@ class _HomePageState extends State<HomePage>  {
       updateQRCode();
     });
   }
+
   List<int> carouselImageIndices = [0, 1, 2, 3];
   int currentCarouselIndex = 0;
 
-@override
+  @override
   void dispose() {
     super.dispose();
     imageLabeler.close();
@@ -76,7 +74,8 @@ class _HomePageState extends State<HomePage>  {
       doImageLabeling();
     });
   }
-   _imgFromGallery() async {
+
+  _imgFromGallery() async {
     XFile? pickedFile =
         await imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -86,48 +85,53 @@ class _HomePageState extends State<HomePage>  {
       });
     }
   }
+
   doImageLabeling() async {
     result = "";
-  final inputImage = InputImage.fromFile(_image!);
-  final List<ImageLabel> labels = await imageLabeler.processImage(inputImage);
+    final inputImage = InputImage.fromFile(_image!);
+    final List<ImageLabel> labels = await imageLabeler.processImage(inputImage);
 
-  double maxConfidence = 0; // To keep track of the highest confidence
-  String maxConfidenceLabel = ""; // To store the label with the highest confidence
+    double maxConfidence = 0;
+    String maxConfidenceLabel = "";
 
-  for (ImageLabel label in labels) {
-    final String text = label.label;
-    final double confidence = label.confidence;
+    for (ImageLabel label in labels) {
+      final String text = label.label;
+      final double confidence = label.confidence;
 
-    if (confidence > maxConfidence) {
-      maxConfidence = confidence;
-      maxConfidenceLabel = text;
+      if (confidence > maxConfidence) {
+        maxConfidence = confidence;
+        maxConfidenceLabel = text;
+      }
+
+      result += "$text   ${confidence.toStringAsFixed(2)}\n";
+      print("result += $text   ${confidence.toStringAsFixed(2)}\n");
     }
 
-    result += "$text   ${confidence.toStringAsFixed(2)}\n";
-    print("result += $text   ${confidence.toStringAsFixed(2)}\n");
-  }
-
-  setState(() {
-    result;
-  });
+    setState(() {
+      result;
+    });
 
     // Navigasyon
-  if (result.contains('Cat')) {
-    Get.to(() => DetailScreen(picker: 1,));
-  } else if (result.contains('Horse')) {
-    Get.to(() => DetailScreen(picker: 3,));
+    if (result.contains('Cat')) {
+      Get.to(() => DetailScreen(
+            picker: 1,
+          ));
+    } else if (result.contains('Horse')) {
+      Get.to(() => DetailScreen(
+            picker: 3,
+          ));
+    } else if (result.contains('Dog')) {
+      Get.to(() => DetailScreen(
+            picker: 0,
+          ));
+    } else if (result.contains('Bird')) {
+      Get.to(() => DetailScreen(
+            picker: 2,
+          ));
+    } else {
+      Fluttertoast.showToast(msg: "Otelde barınabilecek bir hayvan bulunamadı");
+    }
   }
-  else if (result.contains('Dog')) {
-    Get.to(() => DetailScreen(picker: 0,));
-  }
-  else if (result.contains('Bird')) {
-    Get.to(() => DetailScreen(picker: 2,));
-  }else{
-    Fluttertoast.showToast(msg:"Otelde barınabilecek bir hayvan bulunamadı");
-  }
-  }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -167,18 +171,28 @@ class _HomePageState extends State<HomePage>  {
               ),
             ),
             Column(
-              children: [Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(top:24.0),
-                  child: Text("QR Time".tr,style: TextStyle(color: Colors.green,fontSize: 18,fontWeight: FontWeight.bold),),
+              children: [
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: Text(
+                      "QR Time".tr,
+                      style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
-              ),
-                QrImageView(data: currentTime,version: QrVersions.auto,size: 200,),
+                QrImageView(
+                  data: currentTime,
+                  version: QrVersions.auto,
+                  size: 200,
+                ),
               ],
             )
           ],
         ),
-        
       ),
       drawer: Drawer(
         child: ListView(
@@ -186,7 +200,9 @@ class _HomePageState extends State<HomePage>  {
             DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.white,
-                image: DecorationImage(image: AssetImage('assets/onboarding/page3.png'),fit: BoxFit.cover),
+                image: DecorationImage(
+                    image: AssetImage('assets/onboarding/page3.png'),
+                    fit: BoxFit.cover),
               ),
               child: Text(
                 '',
@@ -195,41 +211,50 @@ class _HomePageState extends State<HomePage>  {
                   fontSize: 24,
                 ),
               ),
-            ),ListTile(
-              leading: Icon(Icons.person,
-              color: Colors.indigo,),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.person,
+                color: Colors.indigo,
+              ),
               title: Text(currentName),
-              onTap: (){
-                Fluttertoast.showToast(msg:"Welcome".tr +" "+ "${currentName}");
+              onTap: () {
+                Fluttertoast.showToast(
+                    msg: "Welcome".tr + " " + "${currentName}");
               },
             ),
             ListTile(
-              leading: Icon(Icons.camera_rear_sharp,
-              color: Colors.green,),
+              leading: Icon(
+                Icons.camera_rear_sharp,
+                color: Colors.green,
+              ),
               title: Text('Cameras'.tr),
               onTap: () {
-                Navigator.pop(context); 
+                Navigator.pop(context);
                 Get.to(() => const LiveCameraScreen());
                 //
               },
             ),
             ListTile(
-              leading: Icon(Icons.camera_roll,
-              color: Colors.amber,),
+              leading: Icon(
+                Icons.camera_roll,
+                color: Colors.amber,
+              ),
               title: Text('Advertisement'.tr),
               onTap: () {
-                Navigator.pop(context); 
+                Navigator.pop(context);
                 Get.to(() => VirtualTour());
-               
               },
             ),
             ListTile(
-              leading: Icon(Icons.phone,
-              color: Colors.red,),
+              leading: Icon(
+                Icons.phone,
+                color: Colors.red,
+              ),
               title: Text('Contact'.tr),
               onTap: () {
                 Navigator.pop(context);
-                 Get.bottomSheet(Container(
+                Get.bottomSheet(Container(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -237,10 +262,11 @@ class _HomePageState extends State<HomePage>  {
                         leading: Icon(Icons.phone),
                         title: const Text('Whatsapp'),
                         onTap: () async {
-                          final Uri url = Uri.parse('https://wa.me/+905334497615');
-                            if (!await launchUrl(url)) {
-                              throw 'Could\'t load the page'.tr;
-                            }
+                          final Uri url =
+                              Uri.parse('https://wa.me/+905334497615');
+                          if (!await launchUrl(url)) {
+                            throw 'Could\'t load the page'.tr;
+                          }
                         },
                         tileColor: Colors.greenAccent,
                         textColor: Colors.white,
@@ -249,7 +275,8 @@ class _HomePageState extends State<HomePage>  {
                         leading: const Icon(Icons.photo),
                         title: const Text('Instagram'),
                         onTap: () {
-                          Fluttertoast.showToast(msg:  "İnstagram linki açıldı.");
+                          Fluttertoast.showToast(
+                              msg: "İnstagram linki açıldı.");
                         },
                         tileColor: Colors.amber,
                         textColor: Colors.white,
@@ -257,8 +284,8 @@ class _HomePageState extends State<HomePage>  {
                       ListTile(
                         leading: Icon(Icons.facebook),
                         title: Text("Facebook"),
-                        onTap: (){
-                          Fluttertoast.showToast(msg:  "Facebook linki açıldı.");
+                        onTap: () {
+                          Fluttertoast.showToast(msg: "Facebook linki açıldı.");
                         },
                         tileColor: Colors.blue,
                         textColor: Colors.white,
@@ -270,44 +297,40 @@ class _HomePageState extends State<HomePage>  {
             ),
           ],
         ),
-
       ),
       floatingActionButton: Column(
-  mainAxisAlignment: MainAxisAlignment.end,
-  children: [
-    FloatingActionButton(
-      onPressed: () {
-        //FAB KAMERA MODEL ACTION
-        _imgFromCamera();
-      },
-      child: Icon(Icons.camera_alt),
-      backgroundColor: Colors.blue, 
-    ),
-    SizedBox(height: 16), 
-    FloatingActionButton(
-      onPressed: () {
-        int selectedPicker = 0;
-    if (currentCarouselIndex == 0) {
-      selectedPicker = 0; // Köpek resmi
-    } else if (currentCarouselIndex == 1) {
-      selectedPicker = 1; // Kedi resmi
-    } else if (currentCarouselIndex == 2) {
-      selectedPicker = 2; // Kuş resmi
-    } else if (currentCarouselIndex == 3) {
-      selectedPicker = 3; // At resmi
-    }
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              //FAB KAMERA MODEL ACTION
+              _imgFromCamera();
+            },
+            child: Icon(Icons.camera_alt),
+            backgroundColor: Colors.blue,
+          ),
+          SizedBox(height: 16),
+          FloatingActionButton(
+            onPressed: () {
+              int selectedPicker = 0;
+              if (currentCarouselIndex == 0) {
+                selectedPicker = 0; // Köpek resmi
+              } else if (currentCarouselIndex == 1) {
+                selectedPicker = 1; // Kedi resmi
+              } else if (currentCarouselIndex == 2) {
+                selectedPicker = 2; // Kuş resmi
+              } else if (currentCarouselIndex == 3) {
+                selectedPicker = 3; // At resmi
+              }
 
-    Get.to(() => DetailScreen(picker: selectedPicker));
-  },
-  child: Icon(Icons.info_outline_rounded),
-  backgroundColor: Colors.green,
-    ),
-  ],
-),
+              Get.to(() => DetailScreen(picker: selectedPicker));
+            },
+            child: Icon(Icons.info_outline_rounded),
+            backgroundColor: Colors.green,
+          ),
+        ],
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-    
-      
     );
   }
- 
 }

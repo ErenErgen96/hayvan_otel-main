@@ -16,6 +16,7 @@ class _LiveCameraScreenState extends State<LiveCameraScreen> {
       appBar: AppBar(
         title: Text('Live Camera'.tr),
         centerTitle: true,
+        backgroundColor: Colors.green,
       ),
       body: InAppWebView(
         initialUrlRequest: URLRequest(
