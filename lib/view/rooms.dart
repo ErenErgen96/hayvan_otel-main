@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:panorama/panorama.dart';
 
 class RoofScreen extends StatelessWidget {
   final String imagePath;
@@ -11,7 +12,12 @@ class RoofScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Virtual Tour'.tr),
-        //BURADA PANORAMA PAKETİ KULLANDIM AMA BU PAKETİ KULLANINCA APP'TEN ÇIKINCA BİR DAHA GİRİŞ YAPAMIYORUM BAŞKA ÇÖZÜM DENEYECEGİM
+        
+      ),
+      body: Center(
+        child: Panorama(
+          child: Image.asset(imagePath),
+        ),
       ),
     );
   }
