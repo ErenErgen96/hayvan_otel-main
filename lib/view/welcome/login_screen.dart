@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
         print("Giriş başarılı oldu. Yanıt: ${response.body}");
         late final responseName = responseBody['userName'];
         late final responseSurname = responseBody['userSurname'];
-        Fluttertoast.showToast(msg:  "Welcome".tr + "${responseName} ${responseSurname}");
+        Fluttertoast.showToast(msg:  "Welcome".tr + " " + "${responseName} ${responseSurname}");
         
         Get.to(() => HomePage(accountOwner: "${responseName} ${responseSurname}",));
         

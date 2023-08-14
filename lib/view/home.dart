@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage>  {
               color: Colors.indigo,),
               title: Text(currentName),
               onTap: (){
-                Fluttertoast.showToast(msg:"Welcome".tr + "${currentName}");
+                Fluttertoast.showToast(msg:"Welcome".tr +" "+ "${currentName}");
               },
             ),
             ListTile(

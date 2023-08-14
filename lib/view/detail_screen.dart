@@ -35,7 +35,7 @@ class _DetailScreenState extends State<DetailScreen> {
     ),
     Animal(
       imagePath: "assets/animals/horse.jpg",
-      labelText: "Horse.tr",
+      labelText: "Horse".tr,
       cardColor: Colors.indigo,
       basePrice: 50.0,
     ),
