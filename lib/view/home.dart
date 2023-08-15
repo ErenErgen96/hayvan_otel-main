@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
     imageLabeler.close();
   }
-
+  //kamera
   _imgFromCamera() async {
     XFile? pickedFile = await imagePicker.pickImage(source: ImageSource.camera);
     _image = File(pickedFile!.path);
@@ -74,18 +74,9 @@ class _HomePageState extends State<HomePage> {
       doImageLabeling();
     });
   }
-
-  _imgFromGallery() async {
-    XFile? pickedFile =
-        await imagePicker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-        doImageLabeling();
-      });
-    }
-  }
-
+  
+  
+  //fotoğraf etiketleme
   doImageLabeling() async {
     result = "";
     final inputImage = InputImage.fromFile(_image!);
