@@ -18,6 +18,7 @@ int _pageIndex = 0;
   void initState() {
     _pageController = PageController(initialPage: 0);
     super.initState();
+    
   }
 
   @override

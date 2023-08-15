@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   String result = '';
   dynamic imageLabeler;
   String currentName = "Eren ERGEN";
-  
+
   @override
   void initState() {
     super.initState();
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
             picker: 2,
           ));
     } else {
-      Fluttertoast.showToast(msg: "Otelde barınabilecek bir hayvan bulunamadı");
+      Fluttertoast.showToast(msg: "Otelde barınabilecek bir hayvan bulunamadı!");
     }
   }
 
