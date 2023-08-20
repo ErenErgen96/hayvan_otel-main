@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hayvan_oteli/view/welcome/onboarding_screen.dart';
-import 'package:hayvan_oteli/view/welcome/splash_screen.dart';
+import 'package:hayvan_oteli/view/welcome_screens/onboarding_screen.dart';
+import 'package:hayvan_oteli/view/welcome_screens/splash_screen.dart';
 import 'package:hayvan_oteli/lang/lang_data.dart';
 
 void main() async {

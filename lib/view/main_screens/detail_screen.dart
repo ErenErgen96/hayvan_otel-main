@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../../viewmodel/detail_viewmodel.dart';
+
 class DetailScreen extends StatefulWidget {
   final int picker;
   const DetailScreen({super.key, required this.picker});
@@ -11,63 +13,23 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-
-   
+  late DetailViewModel viewModel; 
   
-  List<Animal> animals = [
-    Animal(
-      imagePath: "assets/animals/dog.jpg",
-      labelText: "Dog".tr,
-      cardColor: Colors.lightGreen,
-      basePrice: 20.0,
-    ),
-    Animal(
-      imagePath: "assets/animals/cat.jpg",
-      labelText: "Cat".tr,
-      cardColor: Colors.orange,
-      basePrice: 10.0,
-    ),
-    Animal(
-      imagePath: "assets/animals/bird.jpg",
-      labelText: "Bird".tr,
-      cardColor: Colors.red,
-      basePrice: 5.0,
-    ),
-    Animal(
-      imagePath: "assets/animals/horse.jpg",
-      labelText: "Horse".tr,
-      cardColor: Colors.indigo,
-      basePrice: 50.0,
-    ),
-  ];
-
-  
-  int numberOfDays = 1;
-  int selectedPackage = 1;
-
-  double packageCoeffAlt = 1;
-  double packageCoeffUst = 2;
-
-  int selectedAnimalIndex = 0; 
-
   @override
   void initState() {
     super.initState();
-    selectedAnimalIndex = widget.picker;
+    viewModel = Get.put(DetailViewModel(picker: widget.picker));
+    
   }
 
-  Animal get selectedAnimal => animals[selectedAnimalIndex];
+  
 
-  double calculatePrice() {
-    double packageCoeff =
-        selectedPackage == 1 ? packageCoeffUst : packageCoeffAlt;
-    return selectedAnimal.basePrice * packageCoeff * numberOfDays;
-  }
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.lightGreen),
+      appBar: AppBar(backgroundColor: Colors.green,title: Text("Hayvan Oteli".tr),centerTitle: true,),
       body: Container(
         color: Colors.blueGrey,
         child: Column(
@@ -76,9 +38,9 @@ class _DetailScreenState extends State<DetailScreen> {
               color: Colors.blueGrey,
               child: Column(children: [
                 CardWidget(
-                  imagePath: selectedAnimal.imagePath,
-                  labelText: selectedAnimal.labelText,
-                  cardColor: selectedAnimal.cardColor,
+                  imagePath: viewModel.selectedAnimal.imagePath,
+                  labelText: viewModel.selectedAnimal.labelText,
+                  cardColor: viewModel.selectedAnimal.cardColor,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -87,17 +49,17 @@ class _DetailScreenState extends State<DetailScreen> {
                         style:
                             TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                     Slider(
-                      value: numberOfDays.toDouble(),
+                      value: viewModel.numberOfDays.toDouble(),
                       min: 1,
                       max: 30,
                       onChanged: (value) {
                         setState(() {
-                          numberOfDays = value.toInt();
+                          viewModel.numberOfDays = value.toInt();
                         });
                       },
                     ),
                     Text(
-                      numberOfDays.toString(),
+                      viewModel.numberOfDays.toString(),
                       style: TextStyle(color: Colors.black87),
                     )
                   ],
@@ -110,10 +72,10 @@ class _DetailScreenState extends State<DetailScreen> {
                       Column(
                         children: [
                           Switch(
-                              value: selectedPackage == 1,
+                              value: viewModel.selectedPackage == 1,
                               onChanged: (value) {
                                 setState(() {
-                                  selectedPackage = value ? 1 : 2;
+                                  viewModel.selectedPackage = value ? 1 : 2;
                                 });
                               }),
                           Text("Top Package".tr),
@@ -129,16 +91,16 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ),
                       Text(
-                        '\$${calculatePrice().toStringAsFixed(2)}',
+                        '\$${viewModel.calculatePrice().toStringAsFixed(2)}',
                         style:
                             TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                ),
+                ),Text("Rezervasyon için qr kodunu okutunuz", style: TextStyle(fontSize: 18, color: Colors.white,fontStyle: FontStyle.italic, fontWeight: FontWeight.w300),),
                 Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: QrImageView(data: "${numberOfDays}" + "days for".tr + "${selectedAnimal.labelText} = \$${calculatePrice().toStringAsFixed(2)}"),
+                  padding: const EdgeInsets.only(top:16.0,bottom: 32,left: 32,right: 32),
+                  child: QrImageView(data: "${viewModel.numberOfDays}" + " " + "days for".tr + " " + "${viewModel.selectedAnimal.labelText} = \$${viewModel.calculatePrice().toStringAsFixed(2)}"),
                 )
               ]),
             ),
@@ -165,7 +127,7 @@ class CardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.snackbar("Detay", "Detay Sayfası");
+        Get.snackbar("Detay", "Test:/Burada tıklayarak daha da detay sayfasına gidilebilir");
       },
       child: Card(
           elevation: 2,
@@ -204,16 +166,3 @@ class CardWidget extends StatelessWidget {
   }
 }
 
-class Animal {
-  final String imagePath;
-  final String labelText;
-  final Color cardColor;
-  final double basePrice;
-
-  Animal({
-    required this.imagePath,
-    required this.labelText,
-    required this.cardColor,
-    required this.basePrice,
-  });
-}

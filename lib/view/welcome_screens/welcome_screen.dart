@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayvan_oteli/view/welcome/login_screen.dart';
-import 'package:hayvan_oteli/view/welcome/signup_screen.dart';
+import 'package:hayvan_oteli/view/welcome_screens/login_screen.dart';
+import 'package:hayvan_oteli/view/welcome_screens/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

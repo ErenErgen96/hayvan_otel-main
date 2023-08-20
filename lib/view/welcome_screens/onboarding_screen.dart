@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayvan_oteli/view/welcome/splash_screen.dart';
-// ONPROGRESS
-//kodlarımı mvvm ve provider kullanarak yeniden yapılandıracağım.
+import 'package:hayvan_oteli/view/welcome_screens/splash_screen.dart';
+
+import '../../viewmodel/onboarding_viewmodel.dart';
 class OnBoardingScreen extends StatefulWidget {
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -10,7 +10,8 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
 late PageController _pageController; 
-//final OnboardingViewModel viewModel = OnboardingViewModel();
+  final OnboardingViewModel _viewModel = Get.put(OnboardingViewModel());
+
 int _pageIndex = 0;
 
 //
@@ -42,17 +43,17 @@ int _pageIndex = 0;
                   _pageIndex = index;
                 });
               },
-              itemCount: onboarding_datas.length,
+              itemCount:_viewModel.onboarding_datas.length,
               itemBuilder: (context, index) => OnboardContent(
-                image: onboarding_datas[index].image,
-                title: onboarding_datas[index].title,
-                description: onboarding_datas[index].description,
+                image: _viewModel.onboarding_datas[index].image,
+                title: _viewModel.onboarding_datas[index].title,
+                description: _viewModel.onboarding_datas[index].description,
               ),
             ),
                   ),
                   Row(
             children: [
-              ...List.generate(onboarding_datas.length, (index) => Padding(
+              ...List.generate(_viewModel.onboarding_datas.length, (index) => Padding(
                 padding: EdgeInsets.only(right: 4),
                 child: DotIndicator(isActive: index == _pageIndex ),
                 )),
@@ -62,7 +63,7 @@ int _pageIndex = 0;
                 width: 60,
                 child: ElevatedButton(
   onPressed: () {
-    if (_pageIndex == onboarding_datas.length - 1) {
+    if (_pageIndex == _viewModel.onboarding_datas.length - 1) {
       
       Get.to(() => SplashScreen());
     } else {
@@ -105,20 +106,7 @@ class DotIndicator extends StatelessWidget {
   }
 }
 
-class OnBoard {
-  final String image, title, description;
-  OnBoard({
-    required this.description,
-    required this.title,
-    required this.image
-  });
-}
 
-final List<OnBoard>onboarding_datas = [
-  OnBoard(description: "Welcome to the Animal Hotel app! By exploring our app, you can easily take advantage of all our services.".tr, title: "Welcome".tr + "!", image: "assets/onboarding/page1.avif"),
-  OnBoard(description: "We welcome your pets with luxury accommodation and specialized care services.".tr, title: "Accommodation".tr + "!", image: "assets/onboarding/page2.avif"),
-  OnBoard(description: "You can confidently leave your animal with us upon delivery. When you return from your vacation, a happy and healthy pet will be waiting for you!".tr, title: "Happy Ending".tr + "!", image: "assets/onboarding/page3.png"),
-];
 
 class OnboardContent extends StatelessWidget {
   const OnboardContent({

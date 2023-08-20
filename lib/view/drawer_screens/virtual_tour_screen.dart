@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayvan_oteli/view/rooms.dart';
+import 'package:hayvan_oteli/view/drawer_screens/rooms.dart';
 
 class VirtualTour extends StatefulWidget {
   const VirtualTour({super.key});
