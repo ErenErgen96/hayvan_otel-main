@@ -6,6 +6,7 @@ import 'package:google_mlkit_image_labeling/google_mlkit_image_labeling.dart';
 import 'package:hayvan_oteli/view/main_screens/detail_screen.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeViewModel extends GetxController {
   final CarouselController carouselController = CarouselController();
@@ -96,6 +97,13 @@ class HomeViewModel extends GetxController {
     imageLabeler.close();
     super.onClose();
   }
+
+  Future<void> launchableUrls(String link) async {
+  final Uri url = Uri.parse(link);
+  if (!await launchUrl(url)) {
+    throw 'Could not load the page'.tr;
+  }
+} 
 
 }
 

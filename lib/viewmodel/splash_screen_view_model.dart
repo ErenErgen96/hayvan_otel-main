@@ -14,7 +14,7 @@ class SplashScreenViewModel extends GetxController {
         update();
       } else {
         timer.cancel();
-        Get.to(() => WelcomeScreen());
+        Get.off(() => WelcomeScreen());
       }
     });
   }

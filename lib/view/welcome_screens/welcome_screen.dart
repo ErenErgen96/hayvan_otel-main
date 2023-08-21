@@ -10,6 +10,7 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           Container(
@@ -21,41 +22,56 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 Positioned(
                   child: Container(
-                    
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      borderRadius: BorderRadius.circular(50)),
-                    padding: EdgeInsets.all(25),
-                    child: Text("Animal Hotel".tr,style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold,color: Colors.white),)),
+                      decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(50)),
+                      padding: EdgeInsets.all(25),
+                      child: Text(
+                        "Animal Hotel".tr,
+                        style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      )),
                   top: 150,
-                  ),
+                ),
                 Positioned(
                   bottom: 0,
                   left: 0,
-                  child: Image.asset('assets/animals/dog_body.jpg', width: size.width * 0.3,),
+                  child: Image.asset(
+                    'assets/animals/dog_body.jpg',
+                    width: size.width * 0.3,
+                  ),
                 ),
-                
                 Positioned(
                   bottom: 0,
                   right: 0,
-                  child: Image.asset('assets/animals/cat_body.jpg', width: size.width * 0.3,),
+                  child: Image.asset(
+                    'assets/animals/cat_body.jpg',
+                    width: size.width * 0.3,
+                  ),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(
-                      style: ButtonStyle(backgroundColor:MaterialStateProperty.all(Colors.green),
-                      fixedSize: MaterialStateProperty.all(Size(size.width*0.8,20))),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.green),
+                          fixedSize: MaterialStateProperty.all(
+                              Size(size.width * 0.8, 20))),
                       onPressed: () {
                         Get.to(() => LoginScreen());
                       },
                       child: Text('Login'.tr),
                     ),
-                    SizedBox(height: 20), 
+                    SizedBox(height: 20),
                     ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor:MaterialStateProperty.all(Colors.green) ,
-                        fixedSize: MaterialStateProperty.all(Size(size.width*0.8,20))),
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.green),
+                          fixedSize: MaterialStateProperty.all(
+                              Size(size.width * 0.8, 20))),
                       onPressed: () {
                         Get.to(() => SignUp());
                       },

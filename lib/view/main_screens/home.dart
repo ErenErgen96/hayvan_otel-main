@@ -155,12 +155,8 @@ class _HomePageState extends State<HomePage> {
                       ListTile(
                         leading: Icon(Icons.phone),
                         title: const Text('Whatsapp'),
-                        onTap: () async {
-                          final Uri url =
-                              Uri.parse('https://wa.me/+905334497615');
-                          if (!await launchUrl(url)) {
-                            throw 'Could\'t load the page'.tr;
-                          }
+                        onTap: () {
+                          viewModel.launchableUrls('https://wa.me/+905334497615');
                         },
                         tileColor: Colors.greenAccent,
                         textColor: Colors.white,
@@ -169,8 +165,7 @@ class _HomePageState extends State<HomePage> {
                         leading: const Icon(Icons.photo),
                         title: const Text('Instagram'),
                         onTap: () {
-                          Fluttertoast.showToast(
-                              msg: "İnstagram linki açıldı.");
+                          viewModel.launchableUrls('https://www.instagram.com/asisotomasyon/');
                         },
                         tileColor: Colors.amber,
                         textColor: Colors.white,
@@ -179,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                         leading: Icon(Icons.facebook),
                         title: Text("Facebook"),
                         onTap: () {
-                          Fluttertoast.showToast(msg: "Facebook linki açıldı.");
+                          viewModel.launchableUrls("https://www.facebook.com/asisotomasyon/?locale=tr_TR");
                         },
                         tileColor: Colors.blue,
                         textColor: Colors.white,
@@ -196,6 +191,7 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+            heroTag: "Camera Button",
             onPressed: () {
               //FAB KAMERA MODEL ACTION
               viewModel.imgFromCamera();
@@ -205,6 +201,7 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(height: 16),
           FloatingActionButton(
+            heroTag: "Details Button",
             onPressed: () {
               int selectedPicker = 0;
               if (currentCarouselIndex == 0) {

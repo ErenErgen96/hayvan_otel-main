@@ -12,14 +12,43 @@ class SignUpViewModel extends GetxController {
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
 
+  var obscureText = true.obs;
+
+  void toggleObscureText() {
+    obscureText.toggle();
+    update();
+  }
+
   Future<void> signUp() async {
-    if (_checkNullValues()) {
-      Fluttertoast.showToast(msg: "Lütfen tüm alanları doldurun.");
+
+    if (usernameController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "Lütfen adınızı girin.");
+      return;
+    }
+
+    if (usersirnameController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "Lütfen soyadınızı girin.");
+      return;
+    }
+
+    if (passwordController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "Lütfen şifrenizi girin.");
+      return;
+    }
+
+    if (emailController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "Lütfen e-posta adresinizi girin.");
+      return;
+    }
+
+    if (phoneNumberController.text.isEmpty) {
+      Fluttertoast.showToast(msg: "Lütfen telefon numaranızı girin.");
       return;
     }
 
     if (phoneNumberController.text.length < 10) {
-      Fluttertoast.showToast(msg: "Telefon numarası en az 10 karakter olmalıdır.");
+      Fluttertoast.showToast(
+          msg: "Telefon numarası en az 10 karakter olmalıdır.");
       return;
     }
 

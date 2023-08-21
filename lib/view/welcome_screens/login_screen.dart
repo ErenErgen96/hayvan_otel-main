@@ -6,9 +6,16 @@ import 'package:hayvan_oteli/view/welcome_screens/signup_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hayvan_oteli/viewmodel/login_viewmodel.dart';
 
-class LoginScreen extends StatelessWidget {
-  
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   final LoginViewModel viewModel = Get.put(LoginViewModel());
+
+  bool isSecurePassword = true;
+  bool rememberMeChecked = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +33,51 @@ class LoginScreen extends StatelessWidget {
             TextField(
               controller: viewModel.usernameController,
               decoration: InputDecoration(
-                  hintText: "Enter Your Username".tr, labelText: 'Username'.tr),
+                  hintText: "Enter Your Phone Number".tr,
+                  labelText: 'Phone Number'.tr),
+              keyboardType: TextInputType.phone,
             ),
             TextField(
-                obscureText: true,
+                obscureText: isSecurePassword,
                 controller: viewModel.passwordController,
                 decoration: InputDecoration(
+                    suffixIcon: togglePassword(),
                     hintText: "Enter Your Password".tr,
                     labelText: 'Password'.tr)),
             SizedBox(height: 16),
-            ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.green)),
-              onPressed: () => viewModel.login(context),
-              child: Text('Login'.tr),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                
+                ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.green)),
+                  onPressed: () {
+                    if (rememberMeChecked) {
+                      viewModel.rememberMe(viewModel.usernameController.text,
+                          viewModel.passwordController.text);
+                    }
+                    viewModel.login(context); 
+                  },
+                  child: Text('Login'.tr),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Remember Me".tr + "!",style: TextStyle(color: Colors.black.withAlpha(150)),),
+                    Checkbox(checkColor: Colors.white,
+                    activeColor: Colors.grey,
+                        value: rememberMeChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            rememberMeChecked = value!;
+                          });
+                        }),
+                  ],
+                ),
+                
+                
+              ],
             ),
             SizedBox(
               height: 16,
@@ -58,6 +96,20 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget togglePassword() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          isSecurePassword = !isSecurePassword;
+        });
+      },
+      icon: isSecurePassword
+          ? Icon(Icons.visibility_off,color: Colors.grey,)
+          : Icon(Icons.visibility),
+      color: Colors.blue,
     );
   }
 }

@@ -4,12 +4,32 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../view/main_screens/home.dart';
 
-class LoginViewModel extends GetxController{
-
+class LoginViewModel extends GetxController {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  LoginViewModel() {
+    getRememberedData();
+  }
+
+  void getRememberedData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? storedUsername = prefs.getString('username');
+    String? storedPassword = prefs.getString('password');
+
+    usernameController.text = storedUsername ?? '';
+    passwordController.text = storedPassword ?? '';
+    ;
+  }
+
+  void rememberMe(String username, String password) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', username);
+    prefs.setString('password', password);
+  }
 
   bool _checkNullValues() {
     return usernameController.text.isEmpty || passwordController.text.isEmpty;
