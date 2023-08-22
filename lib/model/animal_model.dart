@@ -13,3 +13,11 @@ class Animal {
     required this.basePrice,
   });
 }
+
+class ThreeDAnimal {
+  final String threeDImagePath;
+
+  ThreeDAnimal({
+    required this.threeDImagePath,
+  });
+}

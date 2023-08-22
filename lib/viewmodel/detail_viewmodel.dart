@@ -23,6 +23,13 @@ class DetailViewModel extends GetxController{
         selectedPackage == 1 ? packageCoeffUst : packageCoeffAlt;
     return selectedAnimal.basePrice * packageCoeff * numberOfDays;
   }
+
+  List<ThreeDAnimal>  threeDAnimals = [
+    ThreeDAnimal(threeDImagePath: "assets/3d_animals/3ddog.glb"),
+    ThreeDAnimal(threeDImagePath: "assets/3d_animals/3dcat.glb"),
+    ThreeDAnimal(threeDImagePath: "assets/3d_animals/3dbird.glb"),
+    ThreeDAnimal(threeDImagePath: "assets/3d_animals/3dhorse.glb"),
+  ];
   
   List<Animal> animals = [
     Animal(
