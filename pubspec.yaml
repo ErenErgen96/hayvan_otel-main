@@ -49,6 +49,7 @@ dependencies:
   panorama: ^0.4.1
   path_provider: ^2.1.0
   path: ^1.8.3
+  model_viewer_plus: ^1.6.1
 
   
 
@@ -76,6 +77,8 @@ flutter:
     - assets/icons/
     - assets/animals/
     - assets/rooms/
+    - assets/3d_animals/
+    - assets/3d_animals/3ddog.glb
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

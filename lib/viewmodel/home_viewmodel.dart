@@ -16,33 +16,32 @@ class HomeViewModel extends GetxController {
   String result = '';
   dynamic imageLabeler;
   String currentName = "Eren ERGEN";
+  void navigateToDetailScreen(int selectedPicker) {
+    Get.back();
+    Get.to(() => DetailScreen(picker: selectedPicker));
+  }
 
-  
   HomeViewModel() {
-
     final ImageLabelerOptions options =
         ImageLabelerOptions(confidenceThreshold: 0.5);
     imageLabeler = ImageLabeler(options: options);
     updateQRCode();
-    
   }
 
-   void updateQRCode() {
+  void updateQRCode() {
     currentTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
 
     Future.delayed(Duration(seconds: 5), () {
       updateQRCode();
     });
-    
   }
 
   imgFromCamera() async {
     imagePicker = ImagePicker();
     XFile? pickedFile = await imagePicker.pickImage(source: ImageSource.camera);
     image = File(pickedFile!.path);
-    
-      doImageLabeling();
-    
+
+    doImageLabeling();
   }
 
   //fotoğraf etiketleme
@@ -67,8 +66,6 @@ class HomeViewModel extends GetxController {
       print("result += $text   ${confidence.toStringAsFixed(2)}\n");
     }
 
-  
-
     // Navigasyon
     if (result.contains('Cat')) {
       Get.to(() => DetailScreen(
@@ -92,18 +89,16 @@ class HomeViewModel extends GetxController {
     }
   }
 
-   @override
+  @override
   void onClose() {
     imageLabeler.close();
     super.onClose();
   }
 
   Future<void> launchableUrls(String link) async {
-  final Uri url = Uri.parse(link);
-  if (!await launchUrl(url)) {
-    throw 'Could not load the page'.tr;
+    final Uri url = Uri.parse(link);
+    if (!await launchUrl(url)) {
+      throw 'Could not load the page'.tr;
+    }
   }
-} 
-
 }
-

@@ -15,6 +15,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final SignUpViewModel viewModel = SignUpViewModel();
   bool isSecurePassword = true;
   @override
@@ -25,76 +26,122 @@ class _SignUpState extends State<SignUp> {
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                keyboardType: TextInputType.name,
-                controller: viewModel.usernameController,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Name'.tr),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(
-                keyboardType: TextInputType.name,
-                controller: viewModel.usersirnameController,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Surname'.tr),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(
-                obscureText: isSecurePassword,
-                controller: viewModel.passwordController,
-                decoration: InputDecoration(
-                    suffixIcon: togglePassword(),
-                    border: OutlineInputBorder(),
-                    labelText: 'Password'.tr),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(
-                keyboardType: TextInputType.emailAddress,
-                controller: viewModel.emailController,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'E-mail'),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              TextField(
-                keyboardType: TextInputType.phone,
-                controller: viewModel.phoneNumberController,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), labelText: 'Phone Number'.tr),
-              ),
-              SizedBox(height: 16),
-              ElevatedButton(
-                  onPressed: () => viewModel.signUp(),
-                  child: Text('Sign Up'.tr),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.green),
-                  )),
-            ],
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Name".tr;
+                    }
+                  },
+                  keyboardType: TextInputType.name,
+                  controller: viewModel.usernameController,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      border: OutlineInputBorder(),
+                      labelText: 'Name'.tr),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Surname".tr;
+                    }
+                  },
+                  keyboardType: TextInputType.name,
+                  controller: viewModel.usersirnameController,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      border: OutlineInputBorder(),
+                      labelText: 'Surname'.tr),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Password".tr;
+                    }
+                  },
+                  obscureText: isSecurePassword,
+                  controller: viewModel.passwordController,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
+                      suffixIcon: togglePassword(),
+                      border: OutlineInputBorder(),
+                      labelText: 'Password'.tr),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter E-mail".tr;
+                    }
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  controller: viewModel.emailController,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.mail),
+                      border: OutlineInputBorder(),
+                      labelText: 'E-mail'),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Enter Phone Number".tr;
+                    }
+                  },
+                  keyboardType: TextInputType.phone,
+                  controller: viewModel.phoneNumberController,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.phone),
+                      border: OutlineInputBorder(),
+                      labelText: 'Phone Number'.tr),
+                ),
+                SizedBox(height: 16),
+                ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        viewModel.signUp();
+                      }
+                    },
+                    child: Text('Sign Up'.tr),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(Colors.green),
+                    )),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget togglePassword(){
-    
-    return IconButton(onPressed: (){
-      setState(() {
-    isSecurePassword = !isSecurePassword;
-    });
-    }, icon: isSecurePassword ? Icon(Icons.visibility_off) : Icon(Icons.visibility), color: Colors.blue,);
+  Widget togglePassword() {
+    return IconButton(
+      onPressed: () {
+        setState(() {
+          isSecurePassword = !isSecurePassword;
+        });
+      },
+      icon: isSecurePassword
+          ? Icon(Icons.visibility_off,color: Colors.grey,)
+          : Icon(Icons.visibility),
+      color: Colors.blue,
+    );
   }
 }

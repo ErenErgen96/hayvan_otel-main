@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -22,7 +21,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final HomeViewModel viewModel = Get.put(HomeViewModel());
   List<int> carouselImageIndices = [0, 1, 2, 3];
   int currentCarouselIndex = 0;
@@ -35,57 +33,59 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         backgroundColor: Colors.green,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  CarouselSlider(
-                    carouselController: viewModel.carouselController,
-                    items: [
-                      Image.asset('assets/animals/dog.jpg'),
-                      Image.asset('assets/animals/cat.jpg'),
-                      Image.asset('assets/animals/bird.jpg'),
-                      Image.asset('assets/animals/horse.jpg'),
-                    ],
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      aspectRatio: 16 / 9,
-                      enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.height,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          currentCarouselIndex = index;
-                        });
-                      },
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CarouselSlider(
+                      carouselController: viewModel.carouselController,
+                      items: [
+                        Image.asset('assets/animals/dog.jpg'),
+                        Image.asset('assets/animals/cat.jpg'),
+                        Image.asset('assets/animals/bird.jpg'),
+                        Image.asset('assets/animals/horse.jpg'),
+                      ],
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        aspectRatio: 16 / 9,
+                        enlargeCenterPage: true,
+                        enlargeStrategy: CenterPageEnlargeStrategy.height,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            currentCarouselIndex = index;
+                          });
+                        },
+                      ),
                     ),
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 24.0),
+                      child: Text(
+                        "QR Time".tr,
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  QrImageView(
+                    data: viewModel.currentTime,
+                    version: QrVersions.auto,
+                    size: 200,
                   ),
                 ],
-              ),
-            ),
-            Column(
-              children: [
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 24.0),
-                    child: Text(
-                      "QR Time".tr,
-                      style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                QrImageView(
-                  data: viewModel.currentTime,
-                  version: QrVersions.auto,
-                  size: 200,
-                ),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
       drawer: Drawer(
@@ -156,7 +156,8 @@ class _HomePageState extends State<HomePage> {
                         leading: Icon(Icons.phone),
                         title: const Text('Whatsapp'),
                         onTap: () {
-                          viewModel.launchableUrls('https://wa.me/+905334497615');
+                          viewModel
+                              .launchableUrls('https://wa.me/+905334497615');
                         },
                         tileColor: Colors.greenAccent,
                         textColor: Colors.white,
@@ -165,7 +166,8 @@ class _HomePageState extends State<HomePage> {
                         leading: const Icon(Icons.photo),
                         title: const Text('Instagram'),
                         onTap: () {
-                          viewModel.launchableUrls('https://www.instagram.com/asisotomasyon/');
+                          viewModel.launchableUrls(
+                              'https://www.instagram.com/asisotomasyon/');
                         },
                         tileColor: Colors.amber,
                         textColor: Colors.white,
@@ -174,7 +176,8 @@ class _HomePageState extends State<HomePage> {
                         leading: Icon(Icons.facebook),
                         title: Text("Facebook"),
                         onTap: () {
-                          viewModel.launchableUrls("https://www.facebook.com/asisotomasyon/?locale=tr_TR");
+                          viewModel.launchableUrls(
+                              "https://www.facebook.com/asisotomasyon/?locale=tr_TR");
                         },
                         tileColor: Colors.blue,
                         textColor: Colors.white,
@@ -203,7 +206,39 @@ class _HomePageState extends State<HomePage> {
           FloatingActionButton(
             heroTag: "Details Button",
             onPressed: () {
-              int selectedPicker = 0;
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _buildAnimalButton(
+                          'Dog'.tr,
+                          "assets/animals/dog.jpg",
+                          () => viewModel.navigateToDetailScreen(0),
+                        ),
+                        _buildAnimalButton(
+                          'Cat'.tr,
+                          "assets/animals/cat.jpg",
+                          () => viewModel.navigateToDetailScreen(1),
+                        ),
+                        _buildAnimalButton(
+                          'Bird'.tr,
+                          "assets/animals/bird.jpg",
+                          () => viewModel.navigateToDetailScreen(2),
+                        ),
+                        _buildAnimalButton(
+                          'Horse'.tr,
+                          "assets/animals/horse.jpg",
+                          () => viewModel.navigateToDetailScreen(3),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+              /*  int selectedPicker = 0;
               if (currentCarouselIndex == 0) {
                 selectedPicker = 0; // Köpek resmi
               } else if (currentCarouselIndex == 1) {
@@ -214,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                 selectedPicker = 3; // At resmi
               }
 
-              Get.to(() => DetailScreen(picker: selectedPicker));
+              Get.to(() => DetailScreen(picker: selectedPicker));*/
             },
             child: Icon(Icons.info_outline_rounded),
             backgroundColor: Colors.green,
@@ -224,4 +259,21 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
+}
+
+Widget _buildAnimalButton(
+    String animalName, String imagePath, VoidCallback onPressed) {
+  return Container(decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+    child: ListTile(
+      trailing: Icon(Icons.pets),
+      horizontalTitleGap: 12,
+      visualDensity: VisualDensity.standard,
+      leading: CircleAvatar(
+                      backgroundImage: AssetImage(imagePath)
+                          as ImageProvider,
+                    ),
+      title: Text(animalName),
+      onTap: onPressed,
+    ),
+  );
 }
