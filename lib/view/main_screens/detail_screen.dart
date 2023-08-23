@@ -38,69 +38,11 @@ class _DetailScreenState extends State<DetailScreen> {
               Container(
                 color: Colors.blueGrey,
                 child: Column(children: [
-                  CardWidget(
+                 /* CardWidget(
                     imagePath: viewModel.selectedAnimal.imagePath,
                     labelText: viewModel.selectedAnimal.labelText,
                     cardColor: viewModel.selectedAnimal.cardColor,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.blueGrey,Colors.grey]),borderRadius: BorderRadius.all(Radius.circular(250))),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Number of the Days".tr,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16)),
-                            Slider(
-                              value: viewModel.numberOfDays.toDouble(),
-                              min: 1,
-                              max: 30,
-                              onChanged: (value) {
-                                setState(() {
-                                  viewModel.numberOfDays = value.toInt();
-                                });
-                              },
-                            ),
-                            Text(
-                              viewModel.numberOfDays.toString(),
-                              style: TextStyle(color: Colors.black87),
-                            )
-                          ],
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column(
-                                children: [
-                                  Switch(
-                                      value: viewModel.selectedPackage == 1,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          viewModel.selectedPackage =
-                                              value ? 1 : 2;
-                                        });
-                                      }),
-                                  Text("Top Package".tr),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Total Price".tr + ":" + "\$${viewModel.calculatePrice().toStringAsFixed(2)}",
-                                  style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  ),*/
                   Container(
                     child: ModelViewer(
                       src: viewModel.threeDAnimals[viewModel.selectedAnimalIndex].threeDImagePath,
@@ -111,6 +53,68 @@ class _DetailScreenState extends State<DetailScreen> {
                     height: 240,
                     width: double.infinity,
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 48.0),
+                    child: Container(
+                      decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.blueGrey,Colors.grey]),borderRadius: BorderRadius.all(Radius.circular(250))),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Number of the Days".tr,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 16)),
+                              Slider(
+                                value: viewModel.numberOfDays.toDouble(),
+                                min: 1,
+                                max: 30,
+                                onChanged: (value) {
+                                  setState(() {
+                                    viewModel.numberOfDays = value.toInt();
+                                  });
+                                },
+                              ),
+                              Text(
+                                viewModel.numberOfDays.toString(),
+                                style: TextStyle(color: Colors.black87),
+                              )
+                            ],
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Column(
+                                  children: [
+                                    Switch(
+                                        value: viewModel.selectedPackage == 1,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            viewModel.selectedPackage =
+                                                value ? 1 : 2;
+                                          });
+                                        }),
+                                    Text("Top Package".tr),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    "Total Price".tr + ":" + "\$${viewModel.calculatePrice().toStringAsFixed(2)}",
+                                    style: TextStyle(
+                                        fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  
                   Text(
                     "Rezervasyon için qr kodunu okutunuz",
                     style: TextStyle(

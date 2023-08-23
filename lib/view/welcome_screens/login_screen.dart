@@ -32,13 +32,23 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage: AssetImage('assets/onboarding/page3.png')
-                        as ImageProvider,
-                  ),
+              padding: const EdgeInsets.only(bottom:48, top: 12),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.7),
+                      blurRadius: 128.0,
+                    ),
+                  ],
                 ),
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/onboarding/page3.png'), 
+                  radius: 120,
+                ),
+              ),
+            ),
                 TextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
