@@ -3,11 +3,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:hayvan_oteli/view/drawer_screens/live_camera_screen.dart';
-import 'package:hayvan_oteli/view/main_screens/detail_screen.dart';
 import 'package:hayvan_oteli/view/drawer_screens/virtual_tour_screen.dart';
 import 'package:hayvan_oteli/viewmodel/home_viewmodel.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+
+import 'detail_screen.dart';
 
 //import 'package:hayvan_oteli/view/communication_screen.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
             heroTag: "Camera Button",
             onPressed: () {
               //FAB KAMERA MODEL ACTION
-              viewModel.imgFromCamera();
+              viewModel.imgFromGallery();
             },
             child: Icon(Icons.camera_alt),
             backgroundColor: Colors.blue,
@@ -259,6 +259,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
+  
 }
 
 Widget _buildAnimalButton(

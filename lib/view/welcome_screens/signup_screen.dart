@@ -1,10 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hayvan_oteli/view/welcome_screens/login_screen.dart';
-import 'package:http/http.dart' as http;
-import 'package:fluttertoast/fluttertoast.dart';
-
 import '../../viewmodel/signup_viewmodel.dart';
 
 class SignUp extends StatefulWidget {
@@ -39,6 +34,7 @@ class _SignUpState extends State<SignUp> {
                     if (value!.isEmpty) {
                       return "Enter Name".tr;
                     }
+                    return null;
                   },
                   keyboardType: TextInputType.name,
                   controller: viewModel.usernameController,
@@ -55,6 +51,7 @@ class _SignUpState extends State<SignUp> {
                     if (value!.isEmpty) {
                       return "Enter Surname".tr;
                     }
+                    return null;
                   },
                   keyboardType: TextInputType.name,
                   controller: viewModel.usersirnameController,
@@ -71,6 +68,7 @@ class _SignUpState extends State<SignUp> {
                     if (value!.isEmpty) {
                       return "Enter Password".tr;
                     }
+                    return null;
                   },
                   obscureText: isSecurePassword,
                   controller: viewModel.passwordController,
@@ -88,6 +86,7 @@ class _SignUpState extends State<SignUp> {
                     if (value!.isEmpty) {
                       return "Enter E-mail".tr;
                     }
+                    return null;
                   },
                   keyboardType: TextInputType.emailAddress,
                   controller: viewModel.emailController,
@@ -104,6 +103,7 @@ class _SignUpState extends State<SignUp> {
                     if (value!.isEmpty) {
                       return "Enter Phone Number".tr;
                     }
+                    return null;
                   },
                   keyboardType: TextInputType.phone,
                   controller: viewModel.phoneNumberController,
@@ -139,7 +139,10 @@ class _SignUpState extends State<SignUp> {
         });
       },
       icon: isSecurePassword
-          ? Icon(Icons.visibility_off,color: Colors.grey,)
+          ? Icon(
+              Icons.visibility_off,
+              color: Colors.grey,
+            )
           : Icon(Icons.visibility),
       color: Colors.blue,
     );

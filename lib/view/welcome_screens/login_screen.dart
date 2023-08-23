@@ -44,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (value!.isEmpty) {
                       return "Enter Email";
                     }
+                    return null;
                   },
                   controller: viewModel.usernameController,
                   decoration: InputDecoration(

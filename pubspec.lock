@@ -361,7 +361,7 @@ packages:
     source: hosted
     version: "0.2.0"
   meta:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: meta
       sha256: "3c74dbf8763d36539f114c799d8a2d87343b5067e9d796ca22b5eb8437090ee3"
@@ -606,6 +606,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  tflite:
+    dependency: "direct main"
+    description:
+      name: tflite
+      sha256: "661f8942a0e8ca05fedf554cc6f9cc95f526d0e4588d1665e0eb4d29e25e69b1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
   typed_data:
     dependency: transitive
     description:

@@ -50,6 +50,8 @@ dependencies:
   path_provider: ^2.1.0
   path: ^1.8.3
   model_viewer_plus: ^1.6.1
+  tflite: ^1.1.2
+  meta: ^1.9.1
 
   
 
@@ -72,6 +74,9 @@ flutter:
   assets:
     - assets/
     - assets/onboarding/
+    - assets/aimodel/
+    - assets/aimodel/labels.txt
+    - assets/aimodel/model_unquant.tflite
     - assets/splash/
     - assets/lottie/
     - assets/icons/

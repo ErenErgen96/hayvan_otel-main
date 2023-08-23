@@ -1,0 +1,4 @@
+0 Bird
+1 Cat
+2 Horse
+3 Dog
