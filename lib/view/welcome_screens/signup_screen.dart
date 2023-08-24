@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:marquee/marquee.dart';
 import '../../viewmodel/signup_viewmodel.dart';
 
 class SignUp extends StatefulWidget {
@@ -114,15 +115,35 @@ class _SignUpState extends State<SignUp> {
                 ),
                 SizedBox(height: 16),
                 ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        viewModel.signUp();
-                      }
-                    },
-                    child: Text('Sign Up'.tr),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.green),
-                    )),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      viewModel.signUp();
+                    }
+                  },
+                  child: Text('Sign Up'.tr),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.green),
+                  ),
+                ),SizedBox(height: 24,),
+                Text("Bunları Biliyor musunuz?",style: TextStyle(fontSize: 24),),
+                SizedBox(
+                  height: 24,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 25,
+                  child: Marquee(
+                    text: viewModel.messages.join(),
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    scrollAxis: Axis.horizontal,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    blankSpace: 20.0,
+                    pauseAfterRound: Duration(seconds: 1),
+                    startPadding: 10.0,
+                    accelerationDuration: Duration(seconds: 1),
+                    accelerationCurve: Curves.linear,
+                  ),
+                )
               ],
             ),
           ),

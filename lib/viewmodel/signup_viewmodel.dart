@@ -12,6 +12,23 @@ class SignUpViewModel extends GetxController {
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
 
+  final List<String> messages = [
+   "Modern pizza, Italy's Napoli city is where it originated.".tr + "     ",
+  "Electricity and magnetism are actually two interconnected forces.".tr + "     ",
+  "The largest planet in the solar system is Jupiter, and the Great Red Spot on it has been a storm system for years.".tr + "     ",
+  "Sushi is considered the national dish of Japan and is actually made with vinegar-femented rice.".tr + "     ",
+  "One of the most spoken languages, Mandarin Chinese allows the same vowel sound to carry different meanings based on tones.".tr + "     ",
+  "The first mobile phones were not as portable as today's devices and were large and heavy.".tr + "     ",
+  "William Shakespeare is the most prolific writer in English and popularized many modern idioms.".tr + "     ",
+  "Skipping breakfast is thought to slow down metabolism and lead to weight gain.".tr + "     ",
+  "Bees contribute to plant reproduction by aiding in the transfer of pollen among flowers.".tr + "     "
+];
+
+  void changeMessage() {
+    String lastMessage = messages.removeLast();
+    messages.insert(0, lastMessage);
+  }
+  
   var obscureText = true.obs;
 
   void toggleObscureText() {
@@ -89,4 +106,6 @@ class SignUpViewModel extends GetxController {
         emailController.text.isEmpty ||
         phoneNumberController.text.isEmpty;
   }
+
+  
 }
